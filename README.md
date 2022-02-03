@@ -1,3 +1,38 @@
+Домашнее задание к занятию "3.1. Работа в терминале, лекция 1"
+
+1. Процессоры: 2
+   ОЗУ: 1024 МБ
+   ЖД: 64 ГБ
+
+2. Необходимо изменить строки Vagranfile
+config.vm.provider "virtualbox" do |v|
+  v.memory = 1024
+  v.cpus = 2
+end
+
+3. HISTSIZE
+   строка 813 
+   
+   ignoreboth это сокращение для ignorespace и ignoredups
+   
+4. строка 1042 Brace Expansion
+   используются для сокращения параметров команды
+   rm -R img_{01,10,02,04}_2022.jpg
+
+5. touch {1..10000}
+   300000 Создать не получится "Argument list too long"  
+
+6. Конструкция проверяет существует ли /tmp и являеься ли он папкой.
+
+7. mkdir /tmp/new_path_directory
+   export PATH=$PATH:/tmp/new_path_directory
+   cp /bin/bash /tmp/new_path_directory/
+   
+8. at - одноразовая задача на заданное время
+   batch - одноразовая задача выполняется когда загрузка процессора становится меньше 0,8.
+
+
+
 Домашнее задание к занятию «2.4. Инструменты Git»
 
 1. git show aefea
@@ -92,7 +127,7 @@ Date:   Thu Mar 5 21:12:06 2020 +0000
    
 7. git grep -c "func synchronizedWriters("
    команда вернула ничего, т.е. в файлах такой функции не нашлось.
-   
+  git log -S "synchronizedWriters" --oneline --pretty="%H of %an %ae" 
 
 # devops-netology
 Домашнее задание по лекции "Системы контроля версий"
