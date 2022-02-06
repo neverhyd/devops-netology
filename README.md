@@ -25,7 +25,7 @@ end
 6. Конструкция проверяет существует ли /tmp и являеься ли он папкой.
 
 7. mkdir /tmp/new_path_directory
-   export PATH=$PATH:/tmp/new_path_directory
+   export PATH=/tmp/new_path_directory:$PATH
    cp /bin/bash /tmp/new_path_directory/
    
 8. at - одноразовая задача на заданное время
