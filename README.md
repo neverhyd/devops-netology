@@ -1,3 +1,46 @@
+Домашнее задание к занятию "3.3. Операционные системы, лекция 1"
+
+1. stat("/tmp", {st_mode=S_IFDIR|S_ISVTX|0777, st_size=4096, ...}) = 0
+2. openat(AT_FDCWD, "/usr/share/misc/magic.mgc", O_RDONLY) = 3
+3. пробовал на процессе ping 127.0.0.1 > log &
+   PID узнал ps ax | grep ping
+   DESCRIPTOR узнал lsof -p PID
+   echo '' > /proc/PID/fd/DESCRIPTOR
+4. зомби-процессы не осовобождают таблицу процессов.
+5. PID    COMM               FD ERR PATH
+1      systemd            12   0 /proc/634/cgroup
+1      systemd            12   0 /proc/387/cgroup
+1      systemd            12   0 /proc/603/cgroup
+1218   vminfo              6   0 /var/run/utmp
+619    dbus-daemon        -1   2 /usr/local/share/dbus-1/system-services
+619    dbus-daemon        20   0 /usr/share/dbus-1/system-services
+619    dbus-daemon        -1   2 /lib/dbus-1/system-services
+619    dbus-daemon        20   0 /var/lib/snapd/dbus-1/system-services/
+625    irqbalance          6   0 /proc/interrupts
+625    irqbalance          6   0 /proc/stat
+625    irqbalance          6   0 /proc/irq/20/smp_affinity
+
+6.  использует системный вызов uname()       
+   Part of the utsname information is also accessible via /proc/sys/kernel/{ostype, hostname, osrelease, version,
+       domainname}.
+7. ; - разделяет команды
+   && - логическое И
+   использовать && если применять set -e не вижу смысла потому, что -e говорит о немедленном выходе, если команда завершается с не нулевым кодом.
+
+8. 
+-e прерывает выполнение исполнения при ошибке любой команды кроме последней в последовательности 
+-x печать команд с аргументами по мере их выолнения 
+-u считать неустановленные переменные ошибкой при подстановке
+-o pipefail возвращает код возврата набора/последовательности команд, ненулевой при последней команды или 0 для успешного выполнения команд.
+Вероятно для более быстрого выяснения где из-за чего возникают ошибки.
+
+9.
+S - бычный спящий процесс, который может быть прерван, ожидает какого-то события)
+R - исполняется или ожидает исполнения;
+
+доп символы это доп характеристики.
+
+
 Домашнее задание к занятию "3.2. Работа в терминале, лекция 2"
 1. Тип - встроенная команда оболочки.
 2. grep <some_string> <some_file> -c
