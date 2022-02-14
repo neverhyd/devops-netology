@@ -1,12 +1,18 @@
 Домашнее задание к занятию "3.3. Операционные системы, лекция 1"
 
-1. stat("/tmp", {st_mode=S_IFDIR|S_ISVTX|0777, st_size=4096, ...}) = 0
+1. сменит каталог вероятно вот этот - chdir("/tmp")
+   stat("/tmp", {st_mode=S_IFDIR|S_ISVTX|0777, st_size=4096, ...}) = 0
+
 2. openat(AT_FDCWD, "/usr/share/misc/magic.mgc", O_RDONLY) = 3
 3. пробовал на процессе ping 127.0.0.1 > log &
    PID узнал ps ax | grep ping
    DESCRIPTOR узнал lsof -p PID
    echo '' > /proc/PID/fd/DESCRIPTOR
-4. зомби-процессы не осовобождают таблицу процессов.
+   
+4. Все зомби-процессы после завершения работы родителя, переходят в управление процесса init, который их и убивает. 
+зомби-процессы не осовобождают таблицу процессов.
+ 
+
 5. PID    COMM               FD ERR PATH
 1      systemd            12   0 /proc/634/cgroup
 1      systemd            12   0 /proc/387/cgroup
