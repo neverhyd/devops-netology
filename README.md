@@ -1,3 +1,81 @@
+Домашнее задание к занятию "3.4. Операционные системы, лекция 2"
+1.
+/lib/systemd/system/node_exporter.service
+[Unit]
+Description=Node_exporter daemon
+
+[Service]
+EnvironmentFile=/etc/default/node_exporter
+ExecStart=/opt/node_exporter/node_exporter $EXTRA_OPTS
+
+[Install]
+WantedBy=multi-user.target
+
+/etc/default/node_exporter
+EXTRA_OPTS=
+
+sudo systemctl enable node_exporter
+sudo systemctl start node_exporter
+sudo systemctl stop node_exporter
+
+сделал проброс порта 9100 чтобы смотреть на метрики
+
+2.
+node_cpu_seconds_total{cpu="0",mode="idle"}
+node_cpu_seconds_total{cpu="1",mode="system"}
+node_cpu_seconds_total{cpu="1",mode="user"}
+
+node_memory_MemFree_bytes
+node_memory_MemTotal_bytes
+
+node_filesystem_avail_bytes{device="/dev/mapper/ubuntu--vg-ubuntu--lv",fstype="ext4",mountpoint="/"} 2.7262681088e+10
+
+node_network_receive_bytes_total{device="eth0"} 
+node_network_transmit_bytes_total{device="eth0"}
+node_network_transmit_drop_total{device="eth0"}
+node_network_speed_bytes{device="eth0"}
+
+3. Установлено, проброшено, увидено.
+
+4. думаю да
+dmesg | grep virtual
+[    0.002901] CPU MTRRs all blank - virtualized system.
+[    0.105269] Booting paravirtualized kernel on KVM
+[    4.588647] systemd[1]: Detected virtualization oracle.
+
+5.
+sudo sysctl -a | grep fs.nr_open
+fs.nr_open = 1048576
+
+fs.nr_open это верхний предел для параметра fs.file-max
+определяет максимальное кол-во открытых файлов пользователем.
+
+превысить не позволяет параметр Open files (ulimit -n) 
+
+6.
+unshare -f -p --mount-proc /bin/sleep 1h &
+ps aux | grep sleep
+nsenter --target 2167 --pid --mount
+
+7.
+это рекурсивная фукция, запускает в фоне две копии себя 
+:() {
+  : | : &
+}
+:
+
+8.
+механизм
+fork rejected by pids controller in /user.slice/user-1000.slice/session-4.scope
+
+настройки по умолчанию
+/usr/lib/systemd/system/user-.slice.d/10-defaults.conf
+
+По умолчанию максимальное количество задач, которое systemd разрешает для каждого пользователя, составляет 33% от «общесистемного максимума» ( sysctl kernel.threads-max)
+
+
+
+
 Домашнее задание к занятию "3.3. Операционные системы, лекция 1"
 
 1. сменит каталог вероятно вот этот - chdir("/tmp")
