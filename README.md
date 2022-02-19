@@ -34,11 +34,11 @@ Units: sectors of 1 * 512 = 512 bytes\
 Sector size (logical/physical): 512 bytes / 512 bytes\
 I/O size (minimum/optimal): 512 bytes / 512 bytes\
   
-/>>> Script header accepted.  
-/>>> Script header accepted.  
-/>>> Script header accepted.  
-/>>> Script header accepted.  
-/>>> Created a new DOS disklabel with disk identifier 0xeb030542.  
+\>>> Script header accepted.  
+\>>> Script header accepted.  
+\>>> Script header accepted.  
+\>>> Script header accepted.  
+\>>> Created a new DOS disklabel with disk identifier 0xeb030542.  
 /dev/sdc1: Created a new partition 1 of type 'Linux' and of size 2 GiB.  
 /dev/sdc2: Created a new partition 2 of type 'Linux' and of size 511 MiB.  
 /dev/sdc3: Done.  
