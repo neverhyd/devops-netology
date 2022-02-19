@@ -56,7 +56,7 @@ Calling ioctl() to re-read partition table.
 Syncing disks.  
   
 6.  
-root@vagrant:/~# mdadm --create --verbose /dev/md0 --level=1 --raid-devices=2 /dev/sdb1 /dev/sdc1  
+root@vagrant:\~# mdadm --create --verbose /dev/md0 --level=1 --raid-devices=2 /dev/sdb1 /dev/sdc1  
 mdadm: Note: this array has metadata at the start and  
     may not be suitable as a boot device.  If you plan to  
     store '/boot' on this device please ensure that  
@@ -66,7 +66,7 @@ mdadm: size set to 2094080K
 Continue creating array? y  
 mdadm: Defaulting to version 1.2 metadata  
 mdadm: array /dev/md0 started.  
-root@vagrant:/~# cat /proc/mdstat  
+root@vagrant:\~# cat /proc/mdstat  
 Personalities : [linear] [multipath] [raid0] [raid1] [raid6] [raid5] [raid4] [raid10]  
 md0 : active raid1 sdc1[1] sdb1[0]  
       2094080 blocks super 1.2 [2/2] [UU]  
@@ -74,11 +74,11 @@ md0 : active raid1 sdc1[1] sdb1[0]
 unused devices: <none>  
   
 7.   
-root@vagrant:/~# mdadm --create --verbose /dev/md1 --level=0 --raid-devices=2 /dev/sdb2 /dev/sdc2  
+root@vagrant:\~# mdadm --create --verbose /dev/md1 --level=0 --raid-devices=2 /dev/sdb2 /dev/sdc2  
 mdadm: chunk size defaults to 512K  
 mdadm: Defaulting to version 1.2 metadata  
 mdadm: array /dev/md1 started.  
-root@vagrant:/~# cat /proc/mdstat  
+root@vagrant:\~# cat /proc/mdstat  
 Personalities : [linear] [multipath] [raid0] [raid1] [raid6] [raid5] [raid4] [raid10]  
 md1 : active raid0 sdc2[1] sdb2[0]  
       1042432 blocks super 1.2 512k chunks  
@@ -89,26 +89,26 @@ md0 : active raid1 sdc1[1] sdb1[0]
 unused devices: <none>  
   
 8.  
-root@vagrant:~# pvs  
+root@vagrant:\~# pvs  
   PV         VG        Fmt  Attr PSize    PFree  
   /dev/md0             lvm2 ---    <2.00g   <2.00g  
   /dev/md1             lvm2 ---  1018.00m 1018.00m  
   /dev/sda3  ubuntu-vg lvm2 a--   <63.00g  <31.50g  
     
 9.  
-root@vagrant:/~# vgcreate test_vg /dev/md0 /dev/md1  
+root@vagrant:\~# vgcreate test_vg /dev/md0 /dev/md1  
   Volume group "test_vg" successfully created  
-root@vagrant:/~# vgs  
+root@vagrant:\~# vgs  
   VG        #PV #LV #SN Attr   VSize   VFree  
   test_vg     2   0   0 wz--n-  <2.99g  <2.99g  
   ubuntu-vg   1   1   0 wz--n- <63.00g <31.50g  
     
 10.  
-  root@vagrant:~# lvcreate -n 100mb -L 100M test_vg /dev/md1  
+  root@vagrant:\~# lvcreate -n 100mb -L 100M test_vg /dev/md1  
   Logical volume "100mb" created.  
   
 11.  
-root@vagrant:~# mkfs.ext4 /dev/test_vg/100mb  
+root@vagrant:\~# mkfs.ext4 /dev/test_vg/100mb  
 mke2fs 1.45.5 (07-Jan-2020)  
 Creating filesystem with 25600 4k blocks and 25600 inodes  
   
@@ -118,11 +118,11 @@ Creating journal (1024 blocks): done
 Writing superblocks and filesystem accounting information: done  
   
 12.  
-root@vagrant:/~# mkdir /tmp/new  
-root@vagrant:/~# mount /dev/test_vg/100mb /tmp/new  
+root@vagrant:\~# mkdir /tmp/new  
+root@vagrant:\~# mount /dev/test_vg/100mb /tmp/new  
   
 13.  
-root@vagrant:~# cd /tmp/new/  
+root@vagrant:\~# cd /tmp/new/  
 root@vagrant:/tmp/new# wget https://mirror.yandex.ru/ubuntu/ls-lR.gz -O /tmp/new/test.gz  
 --2022-02-16 15:43:33--  https://mirror.yandex.ru/ubuntu/ls-lR.gz  
 Resolving mirror.yandex.ru (mirror.yandex.ru)... 213.180.204.183, 2a02:6b8::183  
