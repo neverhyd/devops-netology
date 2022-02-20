@@ -1,3 +1,129 @@
+Домашнее задание к занятию "3.6. Компьютерные сети, лекция 1"  
+
+1. HTTP/1.1 301 Moved Permanently  
+   запрощенный URL переехал навсегда.  
+   
+2. 307  
+  
+3. 109.252.130.228
+  
+4. MGTS AS25513   
+inetnum:        109.252.128.0 - 109.252.255.255  
+netname:        MGTS-PPPOE  
+descr:          Moscow Local Telephone Network (OAO MGTS)  
+country:        RU  
+admin-c:        USPD-RIPE  
+tech-c:         USPD-RIPE  
+status:         ASSIGNED PA  
+mnt-by:         MGTS-USPD-MNT  
+created:        2009-12-10T11:10:14Z  
+last-modified:  2009-12-10T11:10:14Z  
+source:         RIPE  
+  
+role:           PJSC Moscow City Telephone Network NOC  
+address:        USPD MGTS  
+address:        Moscow, Russia  
+address:        Khachaturyana 5  
+admin-c:        AGS9167-RIPE  
+admin-c:        AVK103-RIPE  
+admin-c:        GIA45-RIPE  
+tech-c:         AVK103-RIPE  
+tech-c:         VMK  
+tech-c:         ANO3-RIPE  
+abuse-mailbox:  abuse@spd-mgts.ru  
+nic-hdl:        USPD-RIPE  
+mnt-by:         MGTS-USPD-MNT  
+created:        2006-09-11T07:56:01Z  
+last-modified:  2021-04-13T10:41:35Z  
+source:         RIPE # Filtered  
+  
+% Information related to '109.252.0.0/16AS25513'  
+  
+route:          109.252.0.0/16  
+descr:          Moscow Local Telephone Network (OAO MGTS)  
+descr:          Moscow, Russia  
+origin:         AS25513  
+mnt-by:         MGTS-USPD-MNT  
+created:        2010-06-30T16:15:54Z  
+last-modified:  2010-06-30T16:15:54Z  
+source:         RIPE   
+
+5.  
+traceroute to 8.8.8.8 (8.8.8.8), 30 hops max, 60 byte packets  
+ 1  192.168.2.1 [*]  6.169 ms  6.058 ms  6.034 ms  
+ 2  100.82.0.1 [*]  8.427 ms  8.406 ms  8.388 ms  
+ 3  212.188.1.6 [AS8359]  10.425 ms  10.407 ms  10.389 ms  
+ 4  212.188.1.5 [AS8359]  10.144 ms * *  
+ 5  195.34.53.206 [AS8359]  11.010 ms  10.982 ms  10.963 ms  
+ 6  212.188.29.82 [AS8359]  10.944 ms  5.999 ms  5.955 ms  
+ 7  108.170.250.83 [AS15169]  5.869 ms 108.170.250.130 [AS15169]  7.438 ms  7.311 ms  
+ 8  209.85.255.136 [AS15169]  19.778 ms * 142.251.49.24 [AS15169]  19.578 ms  
+ 9  216.239.43.20 [AS15169]  23.496 ms 108.170.232.251 [AS15169]  19.513 ms 172.253.66.110 [AS15169]  23.205 ms  
+10  142.250.56.15 [AS15169]  20.628 ms 142.250.238.179 [AS15169]  23.011 ms 216.239.47.201 [AS15169]  22.977 ms  
+11  * * *  
+12  * * *  
+13  * * *  
+14  * * *  
+15  * * *  
+16  * * *  
+17  * * *  
+18  * * *  
+19  * * *  
+20  8.8.8.8 [AS15169]  19.170 ms  19.113 ms *  
+
+6. на этом участке самая большая задержка  
+  AS15169  216.239.51.32  
+  AS15169  172.253.66.110  
+  AS15169  74.125.253.147  
+  
+7.  
+dns.google.             574     IN      A       8.8.8.8  
+dns.google.             574     IN      A       8.8.4.4  
+
+8.  
+vagrant@vagrant:~$ dig -x 8.8.8.8  
+  
+; <<>> DiG 9.16.1-Ubuntu <<>> -x 8.8.8.8  
+;; global options: +cmd  
+;; Got answer:  
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 59638  
+;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1  
+  
+;; OPT PSEUDOSECTION:  
+; EDNS: version: 0, flags:; udp: 65494  
+;; QUESTION SECTION:  
+;8.8.8.8.in-addr.arpa.          IN      PTR  
+  
+;; ANSWER SECTION:  
+8.8.8.8.in-addr.arpa.   6763    IN      PTR     dns.google.  
+  
+;; Query time: 0 msec  
+;; SERVER: 127.0.0.53#53(127.0.0.53)  
+;; WHEN: Sat Feb 19 15:14:18 UTC 2022  
+;; MSG SIZE  rcvd: 73  
+  
+vagrant@vagrant:~$ dig -x 8.8.4.4  
+  
+; <<>> DiG 9.16.1-Ubuntu <<>> -x 8.8.4.4  
+;; global options: +cmd  
+;; Got answer:  
+;; ->>HEADER<<- opcode: QUERY, status: NOERROR, id: 24925  
+;; flags: qr rd ra; QUERY: 1, ANSWER: 1, AUTHORITY: 0, ADDITIONAL: 1  
+  
+;; OPT PSEUDOSECTION:  
+; EDNS: version: 0, flags:; udp: 65494  
+;; QUESTION SECTION:  
+;4.4.8.8.in-addr.arpa.          IN      PTR  
+  
+;; ANSWER SECTION:  
+4.4.8.8.in-addr.arpa.   79839   IN      PTR     dns.google.  
+  
+;; Query time: 8 msec  
+;; SERVER: 127.0.0.53#53(127.0.0.53)  
+;; WHEN: Sat Feb 19 15:14:28 UTC 2022  
+;; MSG SIZE  rcvd: 73    
+  
+
 Домашнее задание к занятию "3.5. Файловые системы"  
   
 2. Файлы, являющиеся жесткой ссылкой на один объект, не могут иметь разные права доступа и владельца.  
