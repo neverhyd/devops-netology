@@ -61,7 +61,7 @@ do
         while (($check < 5))  
         do  
                 echo http://${ip}:80  
-                curl --connect-timeout 5 http://${ip}:80 > log  
+                curl --connect-timeout 5 http://${ip}:80 >> log  
                 check=$(($check+1))  
                 echo $check  
         done  
@@ -80,7 +80,7 @@ do
         while (($check < 5))  
         do  
                 echo http://${ip}:80  
-                curl --connect-timeout 5 http://${ip}:80 > log  
+                curl --connect-timeout 5 http://${ip}:80 >> log  
                 check=$(($check+1))  
                 if (($? != 0))  
                 then  
