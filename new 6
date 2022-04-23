@@ -1,0 +1,73 @@
+Домашнее задание к занятию "3.7. Компьютерные сети, лекция 2"  
+
+1. Linux: ip, ifconfig  
+   Windows: ipconfig, netsh  
+   
+2. lldp. Пакет lldpd. команда lldpctl  
+
+3. VLAN  
+пакет vlan
+команда vconfig
+auto eth0.1400  
+iface eth0.1400 inet static  
+        address 192.168.1.1  
+        netmask 255.255.255.0  
+        vlan_raw_device eth0   
+  
+4.    
+типы агрегации интерфейсов:  
+- balance-rr  
+- active-backup  
+- balance-xor  
+- broadcast  
+- 802.3ad  
+- balance-tlb  
+- balance-alb  
+  
+к опциям балансировки нагрузки относятся режимы balance-rr, balance-xor, balance-tlb, balance-alb  
+auto eth0  
+iface eth0 inet manual  
+    bond-master bond0  
+    bond-primary eth0  
+    bond-mode active-backup  
+     
+auto wlan0  
+iface wlan0 inet manual  
+    wpa-conf /etc/network/wpa.conf  
+    bond-master bond0  
+    bond-primary eth0  
+    bond-mode active-backup  
+  
+# Define master  
+auto bond0  
+iface bond0 inet dhcp  
+    bond-slaves none  
+    bond-primary eth0  
+    bond-mode active-backup  
+    bond-miimon 100  
+
+5.  
+IP адресов в сети с маской /29 - 8 шт.  
+подсетей можно получить - 32 шт.  
+10.10.10.0/29  
+10.10.10.8/29  
+10.10.10.16/29  
+
+6.  
+Адреса можно взять из диапазона 100.64.0.0-100.127.255.255
+а маску взять 26  
+
+7.  
+проверить ARP таблицу в Linux:  
+ip neigh
+в Windows:  
+arp -a  
+  
+Очистить полностью  
+ip neigh flush all  
+arp -d *  
+  
+Удалить один IP  
+ip neigh del IP_ADDRESS  
+arp -d IP_ADDRESS
+
