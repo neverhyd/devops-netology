@@ -34,7 +34,9 @@ RUN groupadd elasticsearch && useradd -g elasticsearch elasticsearch
 ENV ES_JAVA_HOME=/elasticsearch-8.2.2/jdk
 ADD elasticsearch.yml /elasticsearch-8.2.2/config/
 RUN chown -R elasticsearch:elasticsearch /elasticsearch-8.2.2/
+RUN mkdir /elasticsearch-8.2.2/snapshots && chown -R elasticsearch:elasticsearch /elasticsearch-8.2.2/snapshots
 RUN chown -R elasticsearch:elasticsearch /var/lib/
+
 USER elasticsearch
 CMD [ "/elasticsearch-8.2.2/bin/elasticsearch" ]
 ```
