@@ -1,0 +1,88 @@
+---
+- name: Install Clickhouse
+  hosts: clickhouse
+  handlers:
+    - name: Start clickhouse service
+      become: yes
+      ansible.builtin.service:
+        name: clickhouse-server
+        state: reloaded
+  tasks:
+    - block:
+        - name: Get clickhouse distrib
+          ansible.builtin.get_url:
+            url: "https://packages.clickhouse.com/rpm/stable/{{ item }}-{{ clickhouse_version }}.noarch.rpm"
+            dest: "./{{ item }}-{{ clickhouse_version }}.rpm"
+          with_items: "{{ clickhouse_packages }}"
+      rescue:
+        - name: Get clickhouse distrib common
+          ansible.builtin.get_url:
+            url: "https://packages.clickhouse.com/rpm/stable/clickhouse-common-static-{{ clickhouse_version }}.x86_64.rpm"
+            dest: "./clickhouse-common-static-{{ clickhouse_version }}.rpm"
+    - name: Install clickhouse packages
+      become: yes
+      ansible.builtin.yum:
+        disable_gpg_check: yes
+        name:
+          - clickhouse-common-static-{{ clickhouse_version }}.rpm
+          - clickhouse-client-{{ clickhouse_version }}.rpm
+          - clickhouse-server-{{ clickhouse_version }}.rpm
+      notify: 
+        - Start clickhouse service
+    - name: Create database
+      ansible.builtin.command: "clickhouse-client -q 'create database logs;'"
+      register: create_db
+      failed_when: create_db.rc != 0 and create_db.rc !=82
+      changed_when: create_db.rc == 0
+  tags: clickhouse
+- name: Install Vector
+  hosts: vector
+  handlers:
+    - name: Start vector
+      become: yes
+      ansible.builtin.service:
+        name: vector
+        state: reloaded 
+  tasks:
+    - name: Get vector distrib
+      ansible.builtin.get_url:
+        url: "https://packages.timber.io/vector/{{ vector_version }}/vector-{{ vector_version }}-1.x86_64.rpm"
+        dest: "./vector-{{ vector_version }}.rpm"
+    - name: Install vector
+      become: yes
+      ansible.builtin.yum:
+        disable_gpg_check: yes
+        name: vector-{{ vector_version }}.rpm
+      notify: Start vector
+  tags: vector
+- name: Install lighthouse
+  hosts: lighthouse
+  handlers:
+    - name: Start lighthouse
+      become: yes
+      ansible.builtin.service:
+        name: lighthouse
+        state: reloaded
+  tasks:
+    - name: Install Nginx
+      become: yes
+      ansible.builtin.yum:
+        name: nginx
+    - name: Apply Nginx template conf
+      become: yes
+      template:
+        backup: yes
+        force: yes
+        src: files/lighthouse.conf.j2
+        dest: /etc/nginx/nginx.conf
+    - name: Install Git
+      become: yes
+      ansible.builtin.yum:
+        name: git
+    - name: Clone lighthouse
+      become: yes
+      ansible.builtin.git:
+        repo: "{{ lighthouse_repo }}"
+        dest: "{{ lighthouse_root }}"
+      notify: Start lighthouse
+ tags: lighthouse
