@@ -16,7 +16,6 @@
 
 1. Использовать бесплатные решения, например ELK, Grafana Loki.
 
-1.
-Ошибка в формуле, где не учтены 3xx коды. Верная формула из лекции: SLI = (summ_2xx_requests + summ_3xx_requests)/(summ_all_requests)
+1. Ошибка в формуле, где не учтены 3xx коды. Верная формула из лекции: SLI = (summ_2xx_requests + summ_3xx_requests)/(summ_all_requests)
 
 ---
