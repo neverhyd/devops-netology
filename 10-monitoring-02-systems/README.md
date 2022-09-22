@@ -28,12 +28,12 @@ root@vagrant:/home/vagrant/sandbox#
 ```  
 
 скриншот веб-интерфейса ПО chronograf     
-![image скриншот веб-интерфейса ПО chronograf](chronograf.png).   
+![image скриншот веб-интерфейса ПО chronograf](chronograf.png)   
   
 4. скриншот с отображением метрик утилизации места на диске  
 ![image скриншот с отображением метрик утилизации места на диске](disk_usage.png)  
   
 5. скриншот с отображением метрик docker  
-![image скриншот с отображением метрик docker](docker-plug.png).  
+![image скриншот с отображением метрик docker](docker-plug.png)  
 
 ---
