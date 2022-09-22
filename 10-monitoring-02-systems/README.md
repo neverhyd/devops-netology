@@ -12,14 +12,13 @@ push:
  - нет необходимости устанавливать соединение.  
   
 1.   
-
-    - Prometheus - pull(но умеет работать с push)  
-    - TICK - push  
-    - Zabbix - push(но умеет работать с pull)  
-    - VictoriaMetrics - push(vmagent - pull)  
-    - Nagios - pull  
+ - Prometheus - pull(но умеет работать с push)  
+ - TICK - push  
+ - Zabbix - push(но умеет работать с pull)  
+ - VictoriaMetrics - push(vmagent - pull)  
+ - Nagios - pull  
   
-1.    
+1.  
 ```
 root@vagrant:/home/vagrant/sandbox# curl http://localhost:8086/ping
 root@vagrant:/home/vagrant/sandbox# curl http://localhost:8888
@@ -30,8 +29,10 @@ root@vagrant:/home/vagrant/sandbox#
    
 ![image скриншот веб-интерфейса ПО chronograf](chronograf.png).   
   
-1. ![image скриншот с отображением метрик утилизации места на диске](disk_usage.png)  
+1.  
+![image скриншот с отображением метрик утилизации места на диске](disk_usage.png)  
   
-1. ![image криншот с отображением метрик docker](docker-plug.png).  
+1.  
+![image криншот с отображением метрик docker](docker-plug.png).  
 
 ---
