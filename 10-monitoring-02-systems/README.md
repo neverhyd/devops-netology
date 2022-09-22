@@ -11,14 +11,14 @@ push:
  - тонкое конфигурирование метрик;  
  - нет необходимости устанавливать соединение.  
   
-1.   
+2.   
  - Prometheus - pull(но умеет работать с push)  
  - TICK - push  
  - Zabbix - push(но умеет работать с pull)  
  - VictoriaMetrics - push(vmagent - pull)  
  - Nagios - pull  
   
-1.  
+3.  
 ```
 root@vagrant:/home/vagrant/sandbox# curl http://localhost:8086/ping
 root@vagrant:/home/vagrant/sandbox# curl http://localhost:8888
@@ -26,13 +26,14 @@ root@vagrant:/home/vagrant/sandbox# curl http://localhost:8888
 root@vagrant:/home/vagrant/sandbox# curl http://localhost:9092/kapacitor/v1/ping
 root@vagrant:/home/vagrant/sandbox#
 ```  
-   
+
+скриншот веб-интерфейса ПО chronograf     
 ![image скриншот веб-интерфейса ПО chronograf](chronograf.png).   
   
-1.  
+4. скриншот с отображением метрик утилизации места на диске  
 ![image скриншот с отображением метрик утилизации места на диске](disk_usage.png)  
   
-1.  
-![image криншот с отображением метрик docker](docker-plug.png).  
+5. скриншот с отображением метрик docker  
+![image скриншот с отображением метрик docker](docker-plug.png).  
 
 ---
