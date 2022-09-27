@@ -1,7 +1,7 @@
 # Домашнее задание к занятию "10.03. Grafana"
 
 ### Задание 1
-[!image скриншот веб-интерфейса grafana со списком подключенных Datasource](p1.png)
+![image скриншот веб-интерфейса grafana со списком подключенных Datasource](p1.png)
 
 ## Задание 2
 
@@ -24,10 +24,10 @@ node_memory_MemFree_bytes
 node_filesystem_free_bytes{fstype!~"tmpfs|fuse.lxcfs|squashfs|ramfs|vfat"}
 ```
 
-[!image скриншот получившейся Dashboard](p2.png)
+![image скриншот получившейся Dashboard](p2.png)
 
 ## Задание 3
-[!image скриншот вашей итоговой Dashboard](p3.png)
+![image скриншот вашей итоговой Dashboard](p3.png)
 
 ## Задание 4
 
@@ -35,8 +35,3 @@ node_filesystem_free_bytes{fstype!~"tmpfs|fuse.lxcfs|squashfs|ramfs|vfat"}
 
 ---
 
-### Как оформить ДЗ?
-
-Выполненное домашнее задание пришлите ссылкой на .md-файл в вашем репозитории.
-
----
