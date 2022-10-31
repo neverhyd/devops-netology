@@ -1,0 +1,44 @@
+all:
+  hosts:
+    node1:
+      ansible_host: 192.168.34.252
+      ip: 192.168.34.252
+      access_ip: 192.168.34.252
+      ansible_user: root
+      ansible_ssh_pass: password
+    node2:
+      ansible_host: 192.168.34.251
+      ip: 192.168.34.251
+      access_ip: 192.168.34.251
+      ansible_user: root
+      ansible_ssh_pass: password
+    node3:
+      ansible_host: 192.168.34.250
+      ip: 192.168.34.250
+      access_ip: 192.168.34.250
+      ansible_user: root
+      ansible_ssh_pass: password
+    node4:
+      ansible_host: 192.168.34.249
+      ip: 192.168.34.249
+      access_ip: 192.168.34.249
+      ansible_user: root
+      ansible_ssh_pass: password
+  children:
+    kube_control_plane:
+      hosts:
+        node1:
+    kube_node:
+      hosts:
+        node2:
+        node3:
+        node4:
+    etcd:
+      hosts:
+        node1:
+    k8s_cluster:
+      children:
+        kube_control_plane:
+        kube_node:
+    calico_rr:
+      hosts: {}
