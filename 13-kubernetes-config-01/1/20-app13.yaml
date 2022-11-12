@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: app13
+  name: app13
+  namespace: stage
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: app13
+  template:
+    metadata:
+      labels:
+        app: app13
+    spec:
+      containers:
+        - name: backend
+          image: neverhyd/backend
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: backport
+              containerPort: 9000
+              protocol: TCP
+          env:
+            - name: DATABASE_URL
+              value: postgres://postgres:postgres@db:5432/news
+        - image: neverhyd/frontend
+          name: frontend
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+              name: frontport
+              protocol: TCP
+          env:
+            - name: BASE_URL
+              value: http://app13-svc:9000

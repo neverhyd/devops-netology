@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: backend
+  name: backend
+  namespace: prod
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      containers:
+        - name: backend
+          image: neverhyd/backend
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: backport
+              containerPort: 9000
+              protocol: TCP
+          env:
+            - name: DATABASE_URL
+              value: postgres://postgres:postgres@db:5432/news

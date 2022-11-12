@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend
+  namespace: stage
+spec:
+  selector:
+    app: frontend
+  ports:
+    - name: front
+      port: 80
+      targetPort: 80
+      protocol: TCP
