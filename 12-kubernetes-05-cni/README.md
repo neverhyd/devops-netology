@@ -17,7 +17,8 @@ spec:
   policyTypes:
   - Ingress
 ```
-![image](2.png)  
+
+![image](4.png)  
 
 ## Задание 2: изучить, что запущено по умолчанию
 
