@@ -1,0 +1,91 @@
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+ name: {{ .Release.Name }}-db
+ labels:
+  name: {{ .Release.Name }}-db
+spec:
+ replicas: {{ .Values.dbReplicaCount }}
+ selector:
+  matchLabels:
+   name: {{ .Release.Name }}-db
+ template:
+  metadata:
+   labels:
+    name: {{ .Release.Name }}-db
+  spec:
+   containers:
+   - name: {{ .Release.Name }}-db
+     image: "{{ .Values.dbImage.repository }}:{{ .Values.dbImage.tag }}"
+     imagePullPolicy: {{ .Values.dbImage.pullPolicy }}
+     volumeMounts:
+     - name: db-disk
+       mountPath: /data
+     env:
+     - name: POSTGRES_PASSWORD
+       value: testpassword
+     - name: PGDATA
+       value: /data/pgdata
+   volumes:
+   - name: db-disk
+     persistentVolumeClaim:
+      claimName: {{ .Release.Name }}-dbpvc
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+ name: {{ .Release.Name }}-backend
+ labels:
+  name: {{ .Release.Name }}-backend
+spec:
+ replicas: {{ .Values.backendReplicaCount }}
+ selector:
+  matchLabels:
+   name: {{ .Release.Name }}-backend
+ template:
+  metadata:
+   labels:
+    name: {{ .Release.Name }}-backend
+  spec:
+   containers:
+   - name: {{ .Release.Name }}-backend
+     image: "{{ .Values.backendImage.repository }}:{{ .Values.backendImage.tag }}"
+     imagePullPolicy: {{ .Values.backendImage.pullPolicy }}
+     ports:
+     - name: backport
+       containerPort: 9000
+       protocol: TCP
+     env:
+     - name: DATABASE_URL
+       value: postgres://postgres:postgres@{{ .Release.Name }}-db-svc:5432/news
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+ name: {{ .Release.Name }}-frontend
+ labels:
+  name: {{ .Release.Name }}-frontend
+spec:
+ replicas: {{ .Values.frontendReplicaCount }}
+ selector:
+  matchLabels:
+   app: {{ .Release.Name }}-frontend
+ template:
+  metadata:
+   labels:
+    app: {{ .Release.Name }}-frontend
+  spec:
+   containers:
+   - image: "{{ .Values.frontendImage.repository }}:{{ .Values.frontendImage.tag }}"
+     name: {{ .Release.Name }}-frontend
+     imagePullPolicy: {{ .Values.frontendImage.pullPolicy }}
+     ports:
+     - containerPort: 80
+       name: frontport
+       protocol: TCP
+     env:
+     - name: BASE_URL
+       value: http://{{ .Release.Name }}-backend-svc:9000
