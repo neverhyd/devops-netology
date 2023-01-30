@@ -2,8 +2,8 @@
 
 ---
 ## Задание 1. Яндекс.Облако (обязательное к выполнению)
-
-[terraform-config](cloud.tf)
-[variables.tf](variables.tf)
-
+  
+[terraform-config](cloud.tf)  
+[variables.tf](variables.tf)  
+  
 ---
